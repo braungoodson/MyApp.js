@@ -1,0 +1,227 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
+<span class='line'>  2</span> * JavaScript MVC Sub-System for Micro-MVC
+<span class='line'>  3</span> *
+<span class='line'>  4</span> * @author &lt;a href="mailto:braungoodson@gmail.com">Braun Goodson&lt;/a>
+<span class='line'>  5</span> * @version 1.0.0.0 beta
+<span class='line'>  6</span> * @namespace MVCSubSystem
+<span class='line'>  7</span> */</span><span class="WHIT">
+<span class='line'>  8</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">MVCSubSystem</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">MVCSubSystem</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  9</span> </span><span class="COMM">// ----------------------------------------------------------------------------------</span><span class="WHIT">
+<span class='line'> 10</span> </span><span class="COMM">/**
+<span class='line'> 11</span> * iObserver Class : Acts as an interface for subscribers.
+<span class='line'> 12</span> *
+<span class='line'> 13</span> * @namespace MVCSubSystem
+<span class='line'> 14</span> * @class iObserver
+<span class='line'> 15</span> * @constructor
+<span class='line'> 16</span> */</span><span class="WHIT">
+<span class='line'> 17</span> </span><span class="NAME">MVCSubSystem.iObserver</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 18</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'> 19</span> 	* Id of the observer.
+<span class='line'> 20</span> 	* @property id
+<span class='line'> 21</span> 	* @type String
+<span class='line'> 22</span> 	*/</span><span class="WHIT">
+<span class='line'> 23</span> </span><span class="WHIT">	</span><span class="NAME">this.id</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">"iObserver"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 24</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="COMM">/**
+<span class='line'> 26</span> * iObserver Update Method : Is an interface meant to be defined by an implementing
+<span class='line'> 27</span> *  class. Gets called by MVCSubSystem.Model.notify
+<span class='line'> 28</span> *
+<span class='line'> 29</span> * @function update
+<span class='line'> 30</span> * @returns {void} Doesn't return anything.
+<span class='line'> 31</span> */</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="NAME">MVCSubSystem.iObserver.prototype.update</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="WHIT">	</span><span class="NAME">console.log</span><span class="PUNC">(</span><span class="STRN">"* iObserver update!"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="COMM">// ----------------------------------------------------------------------------------</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="COMM">/**
+<span class='line'> 37</span> * AbstractModel Class
+<span class='line'> 38</span> *
+<span class='line'> 39</span> * @namespace MVCSubSystem
+<span class='line'> 40</span> * @class AbstractModel
+<span class='line'> 41</span> * @constructor
+<span class='line'> 42</span> */</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="NAME">MVCSubSystem.AbstractModel</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'> 45</span> 	* Registry of observables.
+<span class='line'> 46</span> 	* @property registry
+<span class='line'> 47</span> 	* @type DataStructures.LinkedList
+<span class='line'> 48</span> 	*/</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="WHIT">	</span><span class="NAME">this.registry</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">DataStructures.LinkedList</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 50</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="COMM">/**
+<span class='line'> 52</span> * AbstractModel Attach Method : Attaches an observable.
+<span class='line'> 53</span> *
+<span class='line'> 54</span> * @param {Object} observable adds an iObservable to the model's registry.
+<span class='line'> 55</span> * @returns {void}
+<span class='line'> 56</span> */</span><span class="WHIT">
+<span class='line'> 57</span> </span><span class="NAME">MVCSubSystem.AbstractModel.prototype.attach</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">o</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 58</span> </span><span class="WHIT">	</span><span class="NAME">this.registry.add</span><span class="PUNC">(</span><span class="NAME">o</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 59</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 60</span> </span><span class="COMM">/**
+<span class='line'> 61</span> * AbstractModel Detach Method : Detaches an observable.
+<span class='line'> 62</span> *
+<span class='line'> 63</span> * @param {Object} observable removes an iObservable from the model's registry
+<span class='line'> 64</span> * @returns {void}
+<span class='line'> 65</span> */</span><span class="WHIT">
+<span class='line'> 66</span> </span><span class="NAME">MVCSubSystem.AbstractModel.prototype.detach</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">o</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 67</span> </span><span class="WHIT">	</span><span class="NAME">this.registry.remove</span><span class="PUNC">(</span><span class="NAME">o</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 68</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 69</span> </span><span class="COMM">/**
+<span class='line'> 70</span> * AbstractModel Notify Method : Iterates over the registry, and calls
+<span class='line'> 71</span> *  update on each observable.
+<span class='line'> 72</span> *
+<span class='line'> 73</span> * @returns {void}
+<span class='line'> 74</span> */</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="NAME">MVCSubSystem.AbstractModel.prototype.notify</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="WHIT">	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">l</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.registry.length</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 77</span> </span><span class="WHIT">	</span><span class="KEYW">while</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">l</span><span class="PUNC">--</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 78</span> </span><span class="WHIT">		</span><span class="NAME">this.registry</span><span class="PUNC">[</span><span class="NAME">l</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">update</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 79</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 80</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 81</span> </span><span class="COMM">// ----------------------------------------------------------------------------------</span><span class="WHIT">
+<span class='line'> 82</span> </span><span class="COMM">/**
+<span class='line'> 83</span> * AbstractController Class
+<span class='line'> 84</span> *
+<span class='line'> 85</span> * @namespace MVCSubSystem
+<span class='line'> 86</span> * @class AbstractController
+<span class='line'> 87</span> * @constructor
+<span class='line'> 88</span> */</span><span class="WHIT">
+<span class='line'> 89</span> </span><span class="NAME">MVCSubSystem.AbstractController</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 90</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'> 91</span> 	* This controller's view.
+<span class='line'> 92</span> 	* @property view
+<span class='line'> 93</span> 	* @type Object
+<span class='line'> 94</span> 	*/</span><span class="WHIT">
+<span class='line'> 95</span> </span><span class="WHIT">	</span><span class="NAME">this.view</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 96</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'> 97</span> 	* This controller's model.
+<span class='line'> 98</span> 	* @property model
+<span class='line'> 99</span> 	* @type Object
+<span class='line'>100</span> 	*/</span><span class="WHIT">
+<span class='line'>101</span> </span><span class="WHIT">	</span><span class="NAME">this.model</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>102</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>103</span> </span><span class="COMM">/**
+<span class='line'>104</span> * AbstractController Class iObservable Inheritance
+<span class='line'>105</span> */</span><span class="WHIT">
+<span class='line'>106</span> </span><span class="NAME">MVCSubSystem.AbstractController.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">MVCSubSystem.iObserver</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>107</span> </span><span class="COMM">/**
+<span class='line'>108</span> * AbstractController Construct Method : Sets this controller's view, and model. Also
+<span class='line'>109</span> *  attaches this controller to this controller's model.
+<span class='line'>110</span> *
+<span class='line'>111</span> * @param {Object} view The view for this controller's view.
+<span class='line'>112</span> * @returns {void}
+<span class='line'>113</span> */</span><span class="WHIT">
+<span class='line'>114</span> </span><span class="NAME">MVCSubSystem.AbstractController.prototype.construct</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">view</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>115</span> </span><span class="WHIT">	</span><span class="NAME">this.view</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">view</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>116</span> </span><span class="WHIT">	</span><span class="NAME">this.model</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.view.getModel</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>117</span> </span><span class="WHIT">	</span><span class="NAME">this.model.attach</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>118</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>119</span> </span><span class="COMM">/**
+<span class='line'>120</span> * AbstractController Destruction Method : Detaches this controller from this
+<span class='line'>121</span> *  controller's model.
+<span class='line'>122</span> */</span><span class="WHIT">
+<span class='line'>123</span> </span><span class="NAME">MVCSubSystem.AbstractController.prototype.destruct</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>124</span> </span><span class="WHIT">	</span><span class="NAME">this.model.detach</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>125</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>126</span> </span><span class="COMM">// ----------------------------------------------------------------------------------</span><span class="WHIT">
+<span class='line'>127</span> </span><span class="COMM">/**
+<span class='line'>128</span> * AbstractView Class
+<span class='line'>129</span> *
+<span class='line'>130</span> * @namespace MVCSubSystem
+<span class='line'>131</span> * @class AbstractView
+<span class='line'>132</span> * @constructor
+<span class='line'>133</span> */</span><span class="WHIT">
+<span class='line'>134</span> </span><span class="NAME">MVCSubSystem.AbstractView</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>135</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'>136</span> 	* This view's model.
+<span class='line'>137</span> 	* @property model
+<span class='line'>138</span> 	* @type Object
+<span class='line'>139</span> 	*/</span><span class="WHIT">
+<span class='line'>140</span> </span><span class="WHIT">	</span><span class="NAME">this.model</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>141</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'>142</span> 	* This view's controller.
+<span class='line'>143</span> 	* @property controller
+<span class='line'>144</span> 	* @type Object
+<span class='line'>145</span> 	*/</span><span class="WHIT">
+<span class='line'>146</span> </span><span class="WHIT">	</span><span class="NAME">this.controller</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>147</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>148</span> </span><span class="NAME">MVCSubSystem.AbstractView.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">MVCSubSystem.iObserver</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>149</span> </span><span class="COMM">/**
+<span class='line'>150</span> * AbstractView Construct Method : Sets this views's model, and controll. Also
+<span class='line'>151</span> *  attaches this view to this model.
+<span class='line'>152</span> *
+<span class='line'>153</span> * @param {Object} model The model for this views's model.
+<span class='line'>154</span> * @returns {void}
+<span class='line'>155</span> */</span><span class="WHIT">
+<span class='line'>156</span> </span><span class="NAME">MVCSubSystem.AbstractView.prototype.construct</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">model</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>157</span> </span><span class="WHIT">	</span><span class="NAME">this.model</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">model</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>158</span> </span><span class="WHIT">	</span><span class="NAME">this.controller</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">MVCSubSystem.AbstractController</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>159</span> </span><span class="WHIT">	</span><span class="NAME">this.model.attach</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>160</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>161</span> </span><span class="COMM">/**
+<span class='line'>162</span> * AbstractView Destruct Method : Detaches this view from this view's model.
+<span class='line'>163</span> *
+<span class='line'>164</span> * @returns {void}
+<span class='line'>165</span> */</span><span class="WHIT">
+<span class='line'>166</span> </span><span class="NAME">MVCSubSystem.AbstractView.prototype.destruct</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>167</span> </span><span class="WHIT">	</span><span class="NAME">this.model.detach</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>168</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>169</span> </span><span class="COMM">/**
+<span class='line'>170</span> * AbstractView Update Method : Calls this view's draw method.
+<span class='line'>171</span> *
+<span class='line'>172</span> * @returns {void}
+<span class='line'>173</span> */</span><span class="WHIT">
+<span class='line'>174</span> </span><span class="NAME">MVCSubSystem.AbstractView.prototype.update</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>175</span> </span><span class="WHIT">	</span><span class="NAME">this.draw</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>176</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>177</span> </span><span class="COMM">/**
+<span class='line'>178</span> * AbstractView Initialize Method : Calls this view's controller making method.
+<span class='line'>179</span> *
+<span class='line'>180</span> * @returns {void}
+<span class='line'>181</span> * @see MVCSubSystem.AbstractView.makeController()
+<span class='line'>182</span> */</span><span class="WHIT">
+<span class='line'>183</span> </span><span class="NAME">MVCSubSystem.AbstractView.prototype.initialize</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>184</span> </span><span class="WHIT">	</span><span class="NAME">this.controller</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.makeController</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>185</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>186</span> </span><span class="COMM">/**
+<span class='line'>187</span> * AbstractView makeController Method : Calls this view's controller making method.
+<span class='line'>188</span> *
+<span class='line'>189</span> * @returns {Object} controller A controller for this view.
+<span class='line'>190</span> * @see MVCSubSystem.AbstractController()
+<span class='line'>191</span> */</span><span class="WHIT">
+<span class='line'>192</span> </span><span class="NAME">MVCSubSystem.AbstractView.prototype.makeController</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>193</span> </span><span class="WHIT">	</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">MVCSubSystem.AbstractController</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>194</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>195</span> </span><span class="COMM">/**
+<span class='line'>196</span> * AbstractView Draw Method : Will redraw the view.
+<span class='line'>197</span> *
+<span class='line'>198</span> * @returns {void}
+<span class='line'>199</span> */</span><span class="WHIT">
+<span class='line'>200</span> </span><span class="NAME">MVCSubSystem.AbstractView.prototype.draw</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>201</span> </span><span class="WHIT">	</span><span class="NAME">console.log</span><span class="PUNC">(</span><span class="STRN">"* AbstractView drawing!"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>202</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>203</span> </span><span class="COMM">/**
+<span class='line'>204</span> * AbstractView getModel Method : Returns this view's model.
+<span class='line'>205</span> *
+<span class='line'>206</span> * @returns {Object} model This view's model.
+<span class='line'>207</span> * @see MVCSubSystem.AbstractModel()
+<span class='line'>208</span> */</span><span class="WHIT">
+<span class='line'>209</span> </span><span class="NAME">MVCSubSystem.AbstractView.prototype.getModel</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>210</span> </span><span class="WHIT">	</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.model</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>211</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>212</span> </span><span class="COMM">/**
+<span class='line'>213</span> * AbstractView getController Method : Returns this view's controller.
+<span class='line'>214</span> *
+<span class='line'>215</span> * @returns {Object} controller This view's controller.
+<span class='line'>216</span> * @see MVCSubSystem.AbstractController()
+<span class='line'>217</span> */</span><span class="WHIT">
+<span class='line'>218</span> </span><span class="NAME">MVCSubSystem.AbstractView.prototype.getController</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>219</span> </span><span class="WHIT">	</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.controller</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>220</span> </span><span class="PUNC">}</span></pre></body></html>

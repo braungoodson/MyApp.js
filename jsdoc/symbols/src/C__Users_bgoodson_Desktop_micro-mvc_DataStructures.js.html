@@ -1,0 +1,117 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
+<span class='line'>  2</span> * JavaScript Data Structures for Micro-MVC
+<span class='line'>  3</span> *
+<span class='line'>  4</span> * @author &lt;a href="mailto:braungoodson@gmail.com">Braun Goodson&lt;/a>
+<span class='line'>  5</span> * @version 1.0.0.0
+<span class='line'>  6</span> * @namespace DataStructures
+<span class='line'>  7</span> */</span><span class="WHIT">
+<span class='line'>  8</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">DataStructures</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">DataStructures</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  9</span> </span><span class="COMM">/**
+<span class='line'> 10</span> * Common Functions
+<span class='line'> 11</span> *
+<span class='line'> 12</span> * @namespace DataStructures
+<span class='line'> 13</span> * @class common
+<span class='line'> 14</span> */</span><span class="WHIT">
+<span class='line'> 15</span> </span><span class="NAME">DataStructures.Common</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">DataStructures.Common</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 16</span> </span><span class="COMM">/**
+<span class='line'> 17</span> * Common Dump Function : A simple debugging method that dumps the contents of 
+<span class='line'> 18</span> *  an array into the console.
+<span class='line'> 19</span> *
+<span class='line'> 20</span> * @method dump
+<span class='line'> 21</span> * @returns {void} Doesn't return anything.
+<span class='line'> 22</span> */</span><span class="WHIT">
+<span class='line'> 23</span> </span><span class="NAME">DataStructures.Common.dump</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 24</span> </span><span class="WHIT">	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">out</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">''</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="WHIT">	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">l</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.length</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="WHIT">	</span><span class="NAME">console.log</span><span class="PUNC">(</span><span class="STRN">"* Dumping "</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.id</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">" of length: "</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">l</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="WHIT">	</span><span class="KEYW">while</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">l</span><span class="PUNC">--</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">		</span><span class="NAME">out</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">this</span><span class="PUNC">[</span><span class="NAME">l</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">toString</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">';'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">	</span><span class="NAME">console.log</span><span class="PUNC">(</span><span class="STRN">"* Dump: "</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">out</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="COMM">// --------------------------------------------------------------------------</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="COMM">/**
+<span class='line'> 34</span> * Stack Data Structure Constructor : Inherits from Array.
+<span class='line'> 35</span> *
+<span class='line'> 36</span> * @namespace DataStructures
+<span class='line'> 37</span> * @class Stacks
+<span class='line'> 38</span> * @constructor
+<span class='line'> 39</span> */</span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="NAME">DataStructures.Stack</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'> 42</span> 	* Id of the stack.
+<span class='line'> 43</span> 	* @property id
+<span class='line'> 44</span> 	* @type String
+<span class='line'> 45</span> 	*/</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="WHIT">	</span><span class="NAME">this.id</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">"Stack"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 48</span> </span><span class="NAME">DataStructures.Stack.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Array</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="COMM">/**
+<span class='line'> 50</span> * A simple debugging method that dumps the contents of an array
+<span class='line'> 51</span> *  into the console.
+<span class='line'> 52</span> *
+<span class='line'> 53</span> * @method dump
+<span class='line'> 54</span> * @function dump
+<span class='line'> 55</span> * @see DataStructures.Common.dump
+<span class='line'> 56</span> * @returns {void} Doesn't return anything.
+<span class='line'> 57</span> */</span><span class="WHIT">
+<span class='line'> 58</span> </span><span class="NAME">DataStructures.Stack.prototype.dump</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">DataStructures.Common.dump</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 59</span> </span><span class="COMM">// --------------------------------------------------------------------------</span><span class="WHIT">
+<span class='line'> 60</span> </span><span class="COMM">/**
+<span class='line'> 61</span> * LinkedList Data Structure : Contains basic Stack and LinkedList.
+<span class='line'> 62</span> *
+<span class='line'> 63</span> * @namespace DataStructures
+<span class='line'> 64</span> * @class LinkedList
+<span class='line'> 65</span> * @constructor
+<span class='line'> 66</span> */</span><span class="WHIT">
+<span class='line'> 67</span> </span><span class="NAME">DataStructures.LinkedList</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 68</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'> 69</span> 	* Id of the list.
+<span class='line'> 70</span> 	* @property id
+<span class='line'> 71</span> 	* @type String
+<span class='line'> 72</span> 	*/</span><span class="WHIT">
+<span class='line'> 73</span> </span><span class="WHIT">	</span><span class="NAME">this.id</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">"LinkedList"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 74</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="NAME">DataStructures.LinkedList.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Array</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="COMM">/**
+<span class='line'> 77</span> * A simple debugging method that dumps the contents of an array
+<span class='line'> 78</span> *  into the console.
+<span class='line'> 79</span> *
+<span class='line'> 80</span> * @method dump
+<span class='line'> 81</span> * @function dump
+<span class='line'> 82</span> * @see DataStructures.Common.dump
+<span class='line'> 83</span> * @returns {void} Doesn't return anything.
+<span class='line'> 84</span> */</span><span class="WHIT">
+<span class='line'> 85</span> </span><span class="NAME">DataStructures.LinkedList.prototype.dump</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">DataStructures.Common.dump</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 86</span> </span><span class="COMM">/**
+<span class='line'> 87</span> * Add an item to the list. Calls parent push method.
+<span class='line'> 88</span> *
+<span class='line'> 89</span> * @function add
+<span class='line'> 90</span> * @param {Object} item The item to add to the list.
+<span class='line'> 91</span> * @returns {void} Doesn't return anything.
+<span class='line'> 92</span> */</span><span class="WHIT">
+<span class='line'> 93</span> </span><span class="NAME">DataStructures.LinkedList.prototype.add</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">item</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 94</span> </span><span class="WHIT">	</span><span class="NAME">this.push</span><span class="PUNC">(</span><span class="NAME">item</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 95</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 96</span> </span><span class="COMM">/**
+<span class='line'> 97</span> * Remove an item from the list. Calls parent splice method.
+<span class='line'> 98</span> *
+<span class='line'> 99</span> * @function remove
+<span class='line'>100</span> * @param {Object} item The item to remove from the list.
+<span class='line'>101</span> * @returns {void} Doesn't return anything.
+<span class='line'>102</span> */</span><span class="WHIT">
+<span class='line'>103</span> </span><span class="NAME">DataStructures.LinkedList.prototype.remove</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">item</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>104</span> </span><span class="WHIT">	</span><span class="NAME">this.splice</span><span class="PUNC">(</span><span class="NAME">this.indexOf</span><span class="PUNC">(</span><span class="NAME">item</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>105</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>106</span> </span><span class="COMM">// --------------------------------------------------------------------------</span><span class="WHIT">
+<span class='line'>107</span> </span><span class="COMM">/*console.log("* DataStructures.Stack.prototype.dump = " + DataStructures.Stack.prototype.dump);console.log("* Function equivalency is: " + (new DataStructures.Stack().dump == new DataStructures.LinkedList().dump));*/</span><span class="WHIT">
+<span class='line'>108</span> </span><span class="COMM">/*var s = new DataStructures.Stack();s.push(0);s.push(1);s.push(2);s.dump();*/</span><span class="WHIT">
+<span class='line'>109</span> </span><span class="COMM">/*var l = new DataStructures.LinkedList();l.add(0);l.add(1);l.add(2);l.add(3);l.remove(1);l.dump();*/</span><span class="WHIT">
+<span class='line'>110</span> </span></pre></body></html>
