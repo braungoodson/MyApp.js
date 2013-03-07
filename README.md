@@ -1,7 +1,7 @@
-Micro-MVC
+MyApp.js
 =========
 
-A Micro-MVC framework in JavaScript under ECMAScript 5~
+An example front-end application using an MVC Sub-System following the Observable pattern in JavaScript under ECMAScript 5.
 
 * To give this thing a test run, just open the `MyApp.html` page in a browser.
 * To view the docs, just open `jsdoc/index.html` in a browser.
