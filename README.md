@@ -1,7 +1,7 @@
 MyApp.js
 =========
 
-An example front-end application using an MVC Sub-System following the Observable pattern in JavaScript under ECMAScript 5.
+MyApp.js is an example front-end application using an Object Oriented MVC architecture with an Observable pattern. Both the framework and example application are written in JavaScript adhering to ECMAScript 5. The MVC sub-system utilizes prototype chaining for fast inheritance.
 
 * To give this thing a test run, just open the `MyApp.html` page in a browser.
 * To view the docs, just open `jsdoc/index.html` in a browser.
