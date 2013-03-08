@@ -6,9 +6,12 @@ MyApp.js is an example front-end application using an object-oriented MVC archit
 * To give this thing a test run, just open the `MyApp.html` page in a browser.
 * To view the docs, just open `jsdoc/index.html` in a browser.
 
-`DataStructures.js` contains simple data structure faceds that inehrit from the `Array()` object. They are meant for a semantic.
-`MVCSubSystem.js` relies on the data structure semantics, and contains its own set of "abstract classes" that can be inherited to create your own MVC application.
-`MyApp.js` contains an example application of the framework. This is a good place to start..
+Content
+=========
+
+* `DataStructures.js` contains simple data structure faceds that inehrit from the `Array()` object. They are meant for a semantic.
+* `MVCSubSystem.js` relies on the data structure semantics, and contains its own set of "abstract classes" that can be inherited to create your own MVC application.
+* `MyApp.js` contains an example application of the framework. This is a good place to start..
 
 --
 2013-01-10
